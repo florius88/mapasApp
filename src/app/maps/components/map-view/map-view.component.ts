@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild, inject } from '@angula
 
 import { Map, Marker, Popup } from 'mapbox-gl';
 
-import { PlacesService } from '../../services';
+import { MapService, PlacesService } from '../../services';
 
 
 @Component({
@@ -13,6 +13,7 @@ import { PlacesService } from '../../services';
 export class MapViewComponent implements AfterViewInit {
 
   private placesService = inject(PlacesService)
+  private mapService = inject(MapService)
 
   @ViewChild('mapDiv')
   mapDivElement!: ElementRef
@@ -37,6 +38,8 @@ export class MapViewComponent implements AfterViewInit {
       .setLngLat(this.placesService.userLocation)
       .setPopup(popup)
       .addTo(map)
+
+    this.mapService.setMap(map)
   }
 
 }
