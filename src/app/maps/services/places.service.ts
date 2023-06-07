@@ -48,8 +48,12 @@ export class PlacesService {
   }
 
   getPlacesByQuery(query: string = '') {
-    // todo: evaluar cuando el query es nulo
-    // -3.702839222986114,40.41591218630202
+    // cuando el query es nulo
+    if (query.length === 0) {
+      this.isLoadingPlaces = false
+      this.places = []
+      return
+    }
 
     if (!this.userLocation) throw Error('No hay userLocation')
 
